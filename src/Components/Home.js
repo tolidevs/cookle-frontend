@@ -34,7 +34,7 @@ class Home extends React.Component {
 
 	loginFunction = (email, password) => {
 		const data = { email, password };
-		fetch('https://localhost:3001', {
+		fetch('https://localhost:3000', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ class Home extends React.Component {
 
 	signUpFunction = (email, password) => {
 		const data = { email, password };
-		fetch('https://localhost:3001', {
+		fetch('https://localhost:3000', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
