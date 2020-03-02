@@ -14,7 +14,7 @@ const LoginForm = props => {
 			visible={loginShown}
 			width='thin'>
 			<Segment>
-				<Form>
+				<Form className="login-form">
 					<Form.Group widths={2}>
 						<Form.Input
 							label='Email'

@@ -65,66 +65,37 @@ class Home extends React.Component {
 	};
 
 	render() {
-		if (!this.state.userMenuShown) {
+
 			return (
-				<Sidebar.Pushable as={Segment}>
-					<LoginForm
-						loginFunction={this.loginFunction}
-						signUpFunction={this.signUpFunction}
-						displayLogin={this.displayLogin}
-						loginShown={this.state.loginShown}
-					/>
-					<Sidebar.Pusher>
-						<Segment>
-							<Header as='h1'>COOKLE</Header>
-							<Header.Subheader>The Recipe App</Header.Subheader>
-							<LoginButton
-								displayLogin={this.displayLogin}
-								currentUser={this.state.currentUser}
+				< Container>
+					<Sidebar.Pushable as={Segment}>
+						{ !this.state.userMenuShown ? <LoginForm
+							loginFunction={this.loginFunction}
+							signUpFunction={this.signUpFunction}
+							displayLogin={this.displayLogin}
+							loginShown={this.state.loginShown}
+						/> : <UserMenu
 								displayUserMenu={this.displayUserMenu}
+								userMenuShown={this.state.userMenuShown}
 							/>
-							<Container>
-								<SearchForm />
-							</Container>
-						</Segment>
-					</Sidebar.Pusher>
-				</Sidebar.Pushable>
+						}
+						
+						<Sidebar.Pusher>
+							<Segment>
+								<LoginButton
+									displayLogin={this.displayLogin}
+									currentUser={this.state.currentUser}
+									displayUserMenu={this.displayUserMenu}
+								/>
+							</Segment>
+						</Sidebar.Pusher>
+					</Sidebar.Pushable>
+					<Header as='h1'>COOKLE</Header>
+					<Header.Subheader>The Recipe App</Header.Subheader>
+					<SearchForm />
+				</Container>
 			);
-		} else {
-			return (
-				<Sidebar.Pushable as={Segment}>
-					<UserMenu
-						displayUserMenu={this.displayUserMenu}
-						userMenuShown={this.state.userMenuShown}
-					/>
-					<Sidebar.Pusher>
-						<Segment>
-							<Header as='h1'>COOKLE</Header>
-							<Header.Subheader>The Recipe App</Header.Subheader>
-							<LoginButton
-								displayLogin={this.displayLogin}
-								currentUser={this.state.currentUser}
-								displayUserMenu={this.displayUserMenu}
-							/>
-							<Container>
-								<p>
-									Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book. It has survived not only five centuries, but
-									also the leap into electronic typesetting, remaining
-									essentially unchanged. It was popularised in the 1960s with
-									the release of Letraset sheets containing Lorem Ipsum
-									passages, and more recently with desktop publishing software
-									like Aldus PageMaker including versions of Lorem Ipsum.
-								</p>
-							</Container>
-						</Segment>
-					</Sidebar.Pusher>
-				</Sidebar.Pushable>
-			);
-		}
+
 	}
 }
 export default Home;
