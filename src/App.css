@@ -1,4 +1,7 @@
-
+body {
+  background-image: url("./pictures/background-img.jpg");
+  background-size: cover;
+}
 
 .App {
   text-align: center;
@@ -6,7 +9,7 @@
 }
 
 .navbar {
-  height: 200px;
+  height: auto;
 
 }
 
