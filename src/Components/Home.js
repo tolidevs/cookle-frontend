@@ -86,7 +86,8 @@ class Home extends React.Component {
 			.then(res => res.json())
 			.then(this.renderResults)
 			.catch(console.log);
-	};
+		e.target.reset()
+	}
 
 	renderResults = data => {
 		console.log(data.results);

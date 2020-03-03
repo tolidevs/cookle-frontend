@@ -1,19 +1,21 @@
-
+body {
+  background-image: url("./pictures/background-img.jpg");
+  background-size: cover;
+}
 
 .App {
   text-align: center;
   display: flex;
 }
 
-.login-form {
-
-}
-
 .navbar {
-  height: 200px;
+  height: auto;
 
 }
 
+.optionsDiv {
+  margin: 10px;
+}
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
