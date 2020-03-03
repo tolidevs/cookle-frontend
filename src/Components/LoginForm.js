@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Form, Segment, Sidebar } from 'semantic-ui-react';
 
+
+
 const LoginForm = props => {
 	const { loginFunction, signUpFunction, displayLogin, loginShown } = props;
 	return (
@@ -14,15 +16,22 @@ const LoginForm = props => {
 			visible={loginShown}
 			width='thin'>
 			<Segment>
-				<Form>
+				<Form className="login-form"
+					onSubmit={e =>
+
+					signUpFunction(e.target.email.value, e.target.password.value)
+				}
+				>
 					<Form.Group widths={2}>
 						<Form.Input
+							name="email"
 							label='Email'
 							placeholder='Email Address'
 							type='email'
 							required
 						/>
 						<Form.Input
+							name="password"
 							label='Password'
 							placeholder='Password'
 							type='password'
@@ -30,25 +39,8 @@ const LoginForm = props => {
 						/>
 					</Form.Group>
 
-					<Button
-						onClick={e =>
-							loginFunction(
-								e.target.parentElement[0].value,
-								e.target.parentElement[1].value
-							)
-						}>
-						Login
-					</Button>
-					<Button
-						secondary
-						onClick={e =>
-							signUpFunction(
-								e.target.parentElement[0].value,
-								e.target.parentElement[1].value
-							)
-						}>
-						Sign Up
-					</Button>
+					<Button name="login" type="submit">Login</Button>
+					{/* <Button name="signup" type="submit" secondary onClick={e => console.log(e.target)}>Sign Up</Button> */}
 				</Form>
 			</Segment>
 		</Sidebar>
