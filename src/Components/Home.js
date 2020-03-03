@@ -95,6 +95,23 @@ class Home extends React.Component {
 		});
 	};
 
+	seeRecipe = id => {
+		const data = { id };
+		console.log(data, id);
+
+		fetch('http://localhost:3000/recipe', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				accept: 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+			.then(res => res.json())
+			.then(data => this.props.showPage(data))
+			.catch(console.log);
+	};
+
 	render() {
 		return (
 			<Container>
@@ -128,7 +145,10 @@ class Home extends React.Component {
 				<Header.Subheader>The Recipe App</Header.Subheader>
 
 				<SearchForm searchFunction={this.searchFunction} />
-				<ResultsContainer results={this.state.results} />
+				<ResultsContainer
+					results={this.state.results}
+					seeRecipe={this.seeRecipe}
+				/>
 			</Container>
 		);
 	}

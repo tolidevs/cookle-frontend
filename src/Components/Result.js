@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Result = props => {
-	const { result } = props;
+	const { result, seeRecipe } = props;
 
 	return (
-		<div>
+		<div onClick={() => seeRecipe(result.id)}>
 			<div>{result.id}</div>
 			<img src={result.image} />
 			<div>{result.title}</div>
