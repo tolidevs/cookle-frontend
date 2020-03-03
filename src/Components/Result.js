@@ -6,7 +6,7 @@ const Result = props => {
 	return (
 		<div>
 			<div>{result.id}</div>
-			<image src={result.image} />
+			<img src={result.image} />
 			<div>{result.title}</div>
 		</div>
 	);
