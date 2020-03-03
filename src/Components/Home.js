@@ -10,7 +10,8 @@ class Home extends React.Component {
 	state = {
 		loginShown: false,
 		currentUser: null,
-		userMenuShown: false
+		userMenuShown: false,
+		recipes: null
 	};
 
 	componentDidMount() {}
@@ -84,6 +85,7 @@ class Home extends React.Component {
 			.then(res => res.json())
 			.then(console.log)
 			.catch(console.log);
+		e.target.reset()
 	}
 
 	render() {

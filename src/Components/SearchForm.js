@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
+import Diet from './Diet'
+import Allergies from './Allergies'
 
-const SearchForm = props => {
-	const { searchFunction } = props;
-	return (
+
+
+class SearchForm extends Component {
+
+	state = {
+		clicked: null
+	}
+
+	handleClick = (e) => {
+		e.preventDefault()
+		const name = e.target.name
+		this.setState({ clicked: name })
 		
-			<Segment className="search-form">
-			<Form onSubmit={e => searchFunction(e)
-			}>
+	}
+
+	renderOptions = () => {
+		const { clicked } = this.state
+		if (clicked === "Allergies") {
+			console.log("allergy")
+			return < Allergies clearOptionsState={this.clearOptionsState} />
+		} else if (clicked === "Diet") {
+			console.log("diet")
+			return < Diet clearOptionsState={this.clearOptionsState} />
+		}
+	}
+
+	clearOptionsState = () => {
+		this.setState({ clicked: null})
+	}
+	
+	render() {
+		const { searchFunction } = this.props
+
+		return (
+		<Segment className="search-form">
+			<Form onSubmit={ e => searchFunction(e)}>
 				<Form.Input
 					name="searchString"
 					label='Search by recipe or ingredients'
@@ -15,42 +46,39 @@ const SearchForm = props => {
 					type='text'
 					required
 				/>
-				<Form.Group widths={3}>
+				<Form.Group widths={4}>
 					<Button
 						secondary
-						// onClick={e =>
-						// 	loginFunction(
-						// 		e.target.parentElement[0].value,
-						// 		e.target.parentElement[1].value
-						// 	)
-						// }>
-						>Dietary Requirements
+						name="Diet"
+						onClick={this.handleClick}
+					>Diet
 					</Button>
 					<Button
 						secondary
-						// onClick={e =>
-						// 	signUpFunction(
-						// 		e.target.parentElement[0].value,
-						// 		e.target.parentElement[1].value
-						// 	)
-						// }>
-						>Calories
+						name="Allergies"
+						onClick={this.handleClick}
+					>Allergies
 					</Button>
 					<Button
 						secondary
-						// onClick={e =>
-						// 	signUpFunction(
-						// 		e.target.parentElement[0].value,
-						// 		e.target.parentElement[1].value
-						// 	)
-						// }>
-						>Prep Time
+						name="Calories"
+						onClick={this.handleClick}
+					>Calories
 					</Button>
-				</Form.Group>
-				<Button type='submit'>Search</Button>
-				</Form>
-			</Segment>
+					<Button
+						secondary
+						onClick={this.handleClick}
+					>Prep Time
+					</Button>
+					</Form.Group>
+					<div>
+						{this.renderOptions()}
+					</div>
+				<Form.Button type='submit'>Search</Form.Button>
+			</Form>
+		</Segment>
 	);
+	}
 };
 
 export default SearchForm;
