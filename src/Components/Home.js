@@ -69,7 +69,21 @@ class Home extends React.Component {
 	};
 
 	searchFunction = (e) => {
-		console.log(e.target.searchString.value)
+		const searchString = (e.target.searchString.value)
+		const searchParams = {
+			search_string: searchString
+		}
+		fetch('http://localhost:3000/search-recipes', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'accept': 'application/json'
+			},
+			body: JSON.stringify(searchParams)
+		})
+			.then(res => res.json())
+			.then(console.log)
+			.catch(console.log);
 	}
 
 	render() {
