@@ -6,8 +6,7 @@ const SearchForm = props => {
 	return (
 		
 			<Segment className="search-form">
-			<Form onSubmit={e =>
-				searchFunction(e)
+			<Form onSubmit={e => searchFunction(e)
 			}>
 				<Form.Input
 					name="searchString"
