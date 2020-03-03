@@ -4,7 +4,8 @@ import { Header, Segment, Sidebar, Container } from 'semantic-ui-react';
 import LoginButton from '../Components/LoginButton';
 import LoginForm from '../Components/LoginForm';
 import UserMenu from '../Components/UserMenu';
-import SearchForm from './SearchForm'
+import SearchForm from './SearchForm';
+import ResultsContainer from './ResultsContainer';
 
 class Home extends React.Component {
 	state = {
@@ -41,7 +42,7 @@ class Home extends React.Component {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'accept': 'application/json'
+				accept: 'application/json'
 			},
 			body: JSON.stringify(data)
 		})
@@ -58,7 +59,7 @@ class Home extends React.Component {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'accept': 'application/json'
+				accept: 'application/json'
 			},
 			body: JSON.stringify(data)
 		})
@@ -68,44 +69,52 @@ class Home extends React.Component {
 			.catch(console.log);
 	};
 
-	searchFunction = (e) => {
-		console.log(e.target.searchString.value)
-	}
+	searchFunction = e => {
+		console.log(e.target.searchString.value);
+	};
+
+	renderResults = data => {
+		this.setState({
+			results: data
+		});
+	};
 
 	render() {
-
-			return (
-				< Container>
-					<Sidebar.Pushable as={Segment} className="navbar">
-						{ !this.state.userMenuShown ? <LoginForm
+		return (
+			<Container>
+				<Sidebar.Pushable as={Segment} className='navbar'>
+					{!this.state.userMenuShown ? (
+						<LoginForm
 							loginFunction={this.loginFunction}
 							signUpFunction={this.signUpFunction}
 							displayLogin={this.displayLogin}
 							loginShown={this.state.loginShown}
-						/> : <UserMenu
-								displayUserMenu={this.displayUserMenu}
-								userMenuShown={this.state.userMenuShown}
-							/>
-						}
-						
-						<Sidebar.Pusher>
-							<Segment>
-								<LoginButton
-									displayLogin={this.displayLogin}
-									currentUser={this.state.currentUser}
-									displayUserMenu={this.displayUserMenu}
-								/>
-							</Segment>
-						</Sidebar.Pusher>
-					</Sidebar.Pushable>
-					
-					<Header as='h1'>COOKLE</Header>
-					<Header.Subheader>The Recipe App</Header.Subheader>
-					
-					<SearchForm searchFunction={this.searchFunction}/>
-				</Container>
-			);
+						/>
+					) : (
+						<UserMenu
+							displayUserMenu={this.displayUserMenu}
+							userMenuShown={this.state.userMenuShown}
+						/>
+					)}
 
+					<Sidebar.Pusher>
+						<Segment>
+							<LoginButton
+								displayLogin={this.displayLogin}
+								currentUser={this.state.currentUser}
+								displayUserMenu={this.displayUserMenu}
+							/>
+						</Segment>
+					</Sidebar.Pusher>
+				</Sidebar.Pushable>
+
+				<Header as='h1'>COOKLE</Header>
+				<Header.Subheader>The Recipe App</Header.Subheader>
+
+				<SearchForm searchFunction={this.searchFunction} />
+				<ResultsContainer results={this.state.results} />
+			</Container>
+		);
 	}
 }
 export default Home;
