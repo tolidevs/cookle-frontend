@@ -35,40 +35,48 @@ class Home extends React.Component {
 
 	loginFunction = (email, password) => {
 		const data = { email, password };
-		this.setUser(data)
+		// this.setUser(data)
 
-		// fetch('https://localhost:3000/users/login', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json'
-		// 	},
-		// 	body: JSON.stringify(data)
-		// })
-		// 	.then(res => res.json)
-		// 	.then(this.setUser)
-		// 	.catch(console.log);
+		fetch('http://localhost:3000/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'accept': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+			.then(res => res.json())
+			.then(console.log)
+			// .then(this.setUser)
+			.catch(console.log);
 	};
 
 	signUpFunction = (email, password) => {
 		const data = { email, password };
-		this.setUser(data)
-	// 	fetch('http://localhost:3000/users/create', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 		},
-	// 		body: JSON.stringify(data)
-	// 	})
-	// 		.then(res => res.json)
-	// 		.then(this.setUser)
-	// 		.catch(console.log);
+		// this.setUser(data)
+		fetch('http://localhost:3000/users/create', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'accept': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+			.then(res => res.json())
+			.then(console.log)
+			// .then(this.setUser)
+			.catch(console.log);
 	};
+
+	searchFunction = (e) => {
+		console.log(e.target.searchString.value)
+	}
 
 	render() {
 
 			return (
 				< Container>
-					<Sidebar.Pushable as={Segment}>
+					<Sidebar.Pushable as={Segment} className="navbar">
 						{ !this.state.userMenuShown ? <LoginForm
 							loginFunction={this.loginFunction}
 							signUpFunction={this.signUpFunction}
@@ -90,9 +98,11 @@ class Home extends React.Component {
 							</Segment>
 						</Sidebar.Pusher>
 					</Sidebar.Pushable>
+					
 					<Header as='h1'>COOKLE</Header>
 					<Header.Subheader>The Recipe App</Header.Subheader>
-					<SearchForm />
+					
+					<SearchForm searchFunction={this.searchFunction}/>
 				</Container>
 			);
 
