@@ -11,7 +11,8 @@ class Home extends React.Component {
 	state = {
 		loginShown: false,
 		currentUser: null,
-		userMenuShown: false
+		userMenuShown: false,
+		results: []
 	};
 
 	componentDidMount() {}
