@@ -20,24 +20,30 @@ class Allergies extends Component {
         wheat: null
     }
 
-    setAllergy = (name) => {
-        !this.state.name ? this.setState({ name }) : this.setState({ name: null })
+  setAllergy = (name) => {
+    !this.state[name] ? this.setState({ [name]: name }) : this.setState({ [name]: null })
     }
 
     renderAllergies = () => {
         const allergies = Object.keys(this.state)
-        return allergies.map(allergy =>
-            <div>
-                < CheckboxSUI
-                name={allergy}
-                checked={this.state.allergies}
-                onClick={e => this.setAllergy(e.target.name)} />
-            </div>)
-        }
+        return allergies.map(allergy => (
+          <div>
+            <CheckboxSUI
+              name={allergy}
+              select={this.setAllergy}
+            />
+          </div>
+        ));
+    }
+  
+    createAllergiesArray = () => {
+      const allergiesArray = Object.values(this.state)
+      this.props.clearOptionsState()
+      this.props.addAllergiesToState(allergiesArray.filter( allergy => allergy))
+    }
     
     render() {
-        const { clearOptionsState } = this.props
-        console.log("render")
+        // const { clearOptionsState } = this.props
         return (
           <div className="optionsDiv">
             <h3>Select allergies</h3>
@@ -47,7 +53,9 @@ class Allergies extends Component {
               compact
               basic
               color="teal"
-              onClick={clearOptionsState}
+              onClick={
+                this.createAllergiesArray
+              }
             >
               Done
             </Button>

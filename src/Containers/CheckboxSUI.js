@@ -1,9 +1,13 @@
 import React from "react";
 import { Checkbox } from "semantic-ui-react";
 
-const CheckboxSUI = ({ name }) => {
+const CheckboxSUI = ({ name, select}) => {
     return (
-        < Checkbox toggle label={name} />
+        < Checkbox
+            toggle
+            onClick={e =>select(e.target.innerText)}
+            label={name}
+        />
     );
 };
 
