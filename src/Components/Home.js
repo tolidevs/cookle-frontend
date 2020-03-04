@@ -7,6 +7,7 @@ import UserMenu from '../Components/UserMenu';
 import SearchForm from './SearchForm';
 import ResultsContainer from './ResultsContainer';
 import searchData from '../DevelopmentData/search.json';
+import showData from '../DevelopmentData/show.json';
 
 class Home extends React.Component {
 	state = {
@@ -16,9 +17,7 @@ class Home extends React.Component {
 		results: []
 	};
 
-	componentDidMount() {
-		console.log(searchData);
-	}
+	componentDidMount() {}
 
 	displayUserMenu = () => {
 		this.setState({
@@ -89,6 +88,7 @@ class Home extends React.Component {
 			.then(res => res.json())
 			.then(this.renderResults)
 			.catch(console.log);
+		// this.renderResults(searchData);
 	};
 
 	renderResults = data => {
@@ -113,6 +113,7 @@ class Home extends React.Component {
 			.then(res => res.json())
 			.then(data => this.props.showPage(data))
 			.catch(console.log);
+		// this.props.showPage(showData);
 	};
 
 	render() {

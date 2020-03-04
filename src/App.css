@@ -13,6 +13,30 @@
 .result {
 }
 
+#foodImage {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+}
+
+#recipeDiv {
+	margin: auto;
+	width: 50%;
+}
+
+#foodTitle {
+	text-align: center;
+}
+#details {
+	padding-left: 5%;
+}
+
+#lists {
+	display: flex;
+	flex-direction: row;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;

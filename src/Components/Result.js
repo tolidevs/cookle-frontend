@@ -9,7 +9,6 @@ const Result = props => {
 			className={'result'}
 			style={{ backgroundImage: `url(${result.image})` }}>
 			<div>{result.id}</div>
-			<img src={result.image} />
 			<div>{result.title}</div>
 		</div>
 	);
