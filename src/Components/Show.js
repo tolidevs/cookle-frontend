@@ -1,9 +1,10 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Header, Segment, Sidebar, Container } from 'semantic-ui-react';
+import { Segment, Sidebar, Container } from 'semantic-ui-react';
 import LoginButton from '../Components/LoginButton';
 import LoginForm from '../Components/LoginForm';
 import UserMenu from '../Components/UserMenu';
+import ShowData from '../Components/ShowData';
 
 class Show extends React.Component {
 	state = {
@@ -45,8 +46,9 @@ class Show extends React.Component {
 					</Sidebar.Pusher>
 				</Sidebar.Pushable>
 
-				<Header as='h1'>COOKLE</Header>
-				<Header.Subheader>The Recipe App</Header.Subheader>
+				<div>
+					<ShowData recipe={this.props.recipe} />
+				</div>
 			</Container>
 		);
 	}

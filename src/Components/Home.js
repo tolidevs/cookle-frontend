@@ -6,6 +6,8 @@ import LoginForm from '../Components/LoginForm';
 import UserMenu from '../Components/UserMenu';
 import SearchForm from './SearchForm';
 import ResultsContainer from './ResultsContainer';
+import searchData from '../DevelopmentData/search.json';
+import showData from '../DevelopmentData/show.json';
 
 class Home extends React.Component {
 	state = {
@@ -86,8 +88,10 @@ class Home extends React.Component {
 			.then(res => res.json())
 			.then(this.renderResults)
 			.catch(console.log);
-		e.target.reset()
-	}
+		// this.renderResults(searchData);
+
+		e.target.reset();
+	};
 
 	renderResults = data => {
 		// console.log(data.results);
@@ -100,7 +104,7 @@ class Home extends React.Component {
 		const data = { id };
 		console.log(data, id);
 
-		fetch('http://localhost:3000/recipe', {
+		fetch('http://localhost:3000/get-recipe', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -111,6 +115,7 @@ class Home extends React.Component {
 			.then(res => res.json())
 			.then(data => this.props.showPage(data))
 			.catch(console.log);
+		// this.props.showPage(showData);
 	};
 
 	render() {
