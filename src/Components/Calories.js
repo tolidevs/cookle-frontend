@@ -6,11 +6,17 @@ import { Button, Label } from "semantic-ui-react";
 
 class Calories extends Component {
     state = {
-        valueSelected: 0
+        valueSelected: this.props.calories
     };
 
+    addCalories = () => {
+        this.props.clearOptionsState()
+        const calories = this.state.valueSelected;
+        this.props.addCaloriesToState(calories)
+    }
+
     render() {
-        const { clearOptionsState } = this.props;
+        // const { clearOptionsState } = this.props;
         // will need an if else if value is 0 don't return a value
         return (
             <div>
@@ -38,7 +44,7 @@ class Calories extends Component {
                 compact
                 basic
                 color="teal"
-                onClick={clearOptionsState}
+                onClick={this.addCalories}
                 >
                 Set Max Cals
                 </Button>

@@ -5,27 +5,35 @@ import { Button } from "semantic-ui-react";
 
 
 class Diet extends Component {
-    state = {
-        glutenfree: null,
-        vegan: null,
-        vegetarian: null,
-        pescatarian: null,
-        ketogenic: null,
-        paleo: null
-    };
+        
+    constructor(props) {
+        super(props);
+        const { diet } = props
+            this.state = {
+                glutenfree: diet && diet.includes("glutenfree") && "glutenfree",
+                vegan: diet && diet.includes("vegan") && "vegan",
+                vegetarian: diet && diet.includes("vegetarian") && "vegetarian",
+                pescatarian: diet && diet.includes("pescatarian") && "pescatarian",
+                ketogenic: diet && diet.includes("ketogenic") && "ketogenic",
+                paleo: diet && diet.includes("paleo") && "paleo"
+            };
+    }
 
-    setDiet = (name) => {
+    setDiet = name => {
         !this.state[name]
         ? this.setState({ [name]: name })
-        : this.setState({ [name]: null });
+        : this.setState({ [name]: false });
     };
 
     renderDiets = () => {
         const diet = Object.keys(this.state);
         return diet.map(diet => (
-        <div>
-            <CheckboxSUI name={diet} select={this.setDiet} />
-        </div>
+            <div>
+                <CheckboxSUI
+                    checked={this.state[diet]}
+                    name={diet}
+                    select={this.setDiet} />
+            </div>
         ));
     };
 
@@ -52,6 +60,6 @@ class Diet extends Component {
         </div>
         );
     }
-}
- 
+    }
+    
 export default Diet;

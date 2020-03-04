@@ -4,24 +4,28 @@ import CheckboxSUI from '../Containers/CheckboxSUI'
 import { Button } from "semantic-ui-react";
 
 class Allergies extends Component {
-
-    state = {
-        dairy: null,
-        egg: null,
-        gluten: null,
-        grain: null,
-        peanut: null,
-        seafood: null,
-        sesame: null,
-        shellfish: null,
-        soy: null,
-        sulfite: null,
-        nut: null,
-        wheat: null
-    }
+  constructor(props) {
+    super(props)
+    const { allergies } = props
+    this.state = {
+      dairy: allergies && allergies.includes("dairy") && "dairy",
+      egg: allergies && allergies.includes("egg") && "egg",
+      gluten: allergies && allergies.includes("gluten") && "gluten",
+      grain: allergies && allergies.includes("grain") && "grain",
+      peanut: allergies && allergies.includes("peanut") && "peanut",
+      seafood: allergies && allergies.includes("seafood") && "seafood",
+      sesame: allergies && allergies.includes("sesame") && "sesame",
+      shellfish: allergies && allergies.includes("shellfish") && "shellfish",
+      soy: allergies && allergies.includes("soy") && "soy",
+      sulfite: allergies && allergies.includes("sulfite") && "sulfite",
+      nut: allergies && allergies.includes("nut") && "nut",
+      wheat: allergies && allergies.includes("wheat") && "wheat"
+    };
+  }
 
   setAllergy = (name) => {
-    !this.state[name] ? this.setState({ [name]: name }) : this.setState({ [name]: null })
+    this.state[name] ? this.setState({ [name]: false }) : this.setState({ [name]: name })
+    
     }
 
     renderAllergies = () => {
@@ -29,8 +33,9 @@ class Allergies extends Component {
         return allergies.map(allergy => (
           <div>
             <CheckboxSUI
+              checked={this.state[allergy]}
               name={allergy}
-              select={this.setAllergy}
+              select={allergy => this.setAllergy(allergy)}
             />
           </div>
         ));
