@@ -89,10 +89,12 @@ class Home extends React.Component {
 			.then(this.renderResults)
 			.catch(console.log);
 		// this.renderResults(searchData);
+
+		e.target.reset();
 	};
 
 	renderResults = data => {
-		console.log(data.results);
+		// console.log(data.results);
 		this.setState({
 			results: data.results
 		});
