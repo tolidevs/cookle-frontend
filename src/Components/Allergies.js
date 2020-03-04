@@ -24,11 +24,6 @@ class Allergies extends Component {
   }
 
   setAllergy = (name) => {
-    // if (this.state[name] === name) {
-    //   this.setState({ [name]: null })
-    // } else if (!this.state[name]) {
-    //   this.setState({ [name]: name })
-    // } 
     this.state[name] ? this.setState({ [name]: false }) : this.setState({ [name]: name })
     
     }

@@ -5,7 +5,7 @@ const CheckboxSUI = ({ name, select, checked}) => {
     return (
         < Checkbox
             toggle
-            checked={checked}
+            checked={!!checked}
             onClick={e =>select(e.target.innerText)}
             label={name}
         />

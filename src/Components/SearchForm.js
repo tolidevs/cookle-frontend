@@ -43,6 +43,16 @@ class SearchForm extends Component {
 		this.setState({ cookTime: cookTime * 60 });
 	};
 
+	clearState = () => {
+		this.setState({
+			clicked: null,
+			allergies: null,
+			diet: null,
+			calories: 0,
+			cookTime: 0
+		})
+	}
+
 	renderOptions = () => {
 		const { clicked, allergies, diet, calories, cookTime } = this.state;
 		switch (clicked) {
@@ -86,10 +96,15 @@ class SearchForm extends Component {
 		
 	render() {
 		const { searchFunction } = this.props;
-
+		const { allergies, diet, calories, cookTime } = this.state
 		return (
-		<Segment className="search-form">
-			<Form onSubmit={e => searchFunction(e)}>
+      	<Segment className="search-form">
+			<Form
+					onSubmit={e => {
+						searchFunction(e, allergies, diet, calories, cookTime)
+						// this.clearState()
+					}}
+			>
 			<Form.Input
 				name="searchString"
 				label="Search by recipe or ingredients"
@@ -115,7 +130,7 @@ class SearchForm extends Component {
 			<Form.Button type="submit">Search</Form.Button>
 			</Form>
 		</Segment>
-		);
+    );
 	}
 	};
 

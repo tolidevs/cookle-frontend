@@ -12,7 +12,6 @@ class Calories extends Component {
     addCalories = () => {
         this.props.clearOptionsState()
         const calories = this.state.valueSelected;
-        console.log(calories)
         this.props.addCaloriesToState(calories)
     }
 
