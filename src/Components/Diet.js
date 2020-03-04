@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Checkbox from '../Containers/Checkbox'
+// import Checkbox from '../Containers/Checkbox'
+import CheckboxSUI from "../Containers/CheckboxSUI";
+import { Button } from "semantic-ui-react";
+
 
 class Diet extends Component {
 
@@ -19,7 +22,7 @@ class Diet extends Component {
     renderDiets = () => {
         const diet = Object.keys(this.state)
         return diet.map(diet =>
-            <div>< Checkbox
+            <div>< CheckboxSUI
                 name={diet}
                 checked={this.state.diet}
                 onClick={e => this.setDiet(e.target.name)} />
@@ -29,10 +32,19 @@ class Diet extends Component {
     render() {
         const { clearOptionsState } = this.props
         return (
-            <div className="optionsDiv">
-                {this.renderDiets()}
-                <button onClick={clearOptionsState}>Done</button>
-            </div>
+          <div className="optionsDiv">
+            <h3>Select diet</h3>
+            {this.renderDiets()}
+            <Button
+              size="tiny"
+              compact
+              basic
+              color="teal"
+              onClick={clearOptionsState}
+            >
+              Done
+            </Button>
+          </div>
         );
     }
 }

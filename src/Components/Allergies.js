@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Checkbox from '../Containers/Checkbox'
+// import Checkbox from '../Containers/Checkbox'
+import CheckboxSUI from '../Containers/CheckboxSUI'
+import { Button } from "semantic-ui-react";
 
 class Allergies extends Component {
 
@@ -25,7 +27,8 @@ class Allergies extends Component {
     renderAllergies = () => {
         const allergies = Object.keys(this.state)
         return allergies.map(allergy =>
-            <div>< Checkbox
+            <div>
+                < CheckboxSUI
                 name={allergy}
                 checked={this.state.allergies}
                 onClick={e => this.setAllergy(e.target.name)} />
@@ -36,10 +39,19 @@ class Allergies extends Component {
         const { clearOptionsState } = this.props
         console.log("render")
         return (
-            <div className="optionsDiv">
-                {this.renderAllergies()}
-                <button onClick={clearOptionsState}>Done</button>
-            </div>
+          <div className="optionsDiv">
+            <h3>Select allergies</h3>
+            {this.renderAllergies()}
+            <Button
+              size="tiny"
+              compact
+              basic
+              color="teal"
+              onClick={clearOptionsState}
+            >
+              Done
+            </Button>
+          </div>
         );
     }
 }

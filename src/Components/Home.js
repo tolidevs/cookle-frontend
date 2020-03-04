@@ -114,6 +114,7 @@ class Home extends React.Component {
 	};
 
 	render() {
+		console.log(process.env.REACT_APP_API_KEY)
 		return (
 			<Container>
 				<Sidebar.Pushable as={Segment} className='navbar'>

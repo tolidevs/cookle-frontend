@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import Diet from './Diet'
 import Allergies from './Allergies'
+import CookTime from './CookTime'
+import Calories from './Calories'
 
 
 
@@ -20,12 +22,20 @@ class SearchForm extends Component {
 
 	renderOptions = () => {
 		const { clicked } = this.state
-		if (clicked === "Allergies") {
-			console.log("allergy")
-			return < Allergies clearOptionsState={this.clearOptionsState} />
-		} else if (clicked === "Diet") {
-			console.log("diet")
-			return < Diet clearOptionsState={this.clearOptionsState} />
+		switch (clicked) {
+			default: break
+			case ("Allergies"):
+				console.log("allergy")
+				return < Allergies clearOptionsState={this.clearOptionsState} />
+		 	case ("Diet"):
+				console.log("diet")
+				return < Diet clearOptionsState={this.clearOptionsState} />
+			case ("Calories"):
+				console.log("calories")
+				return < Calories clearOptionsState={this.clearOptionsState} />;
+			case ("PrepTime"):
+				console.log("prep time")
+				return < CookTime clearOptionsState={this.clearOptionsState} />;
 		}
 	}
 
@@ -48,25 +58,26 @@ class SearchForm extends Component {
 				/>
 				<Form.Group widths={4}>
 					<Button
-						secondary
+						color="teal"
 						name="Diet"
 						onClick={this.handleClick}
 					>Diet
 					</Button>
 					<Button
-						secondary
+						color="teal"
 						name="Allergies"
 						onClick={this.handleClick}
 					>Allergies
 					</Button>
 					<Button
-						secondary
+						color="teal"
 						name="Calories"
 						onClick={this.handleClick}
 					>Calories
 					</Button>
 					<Button
-						secondary
+						color="teal"
+						name="PrepTime"
 						onClick={this.handleClick}
 					>Prep Time
 					</Button>
