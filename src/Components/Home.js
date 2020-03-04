@@ -90,7 +90,7 @@ class Home extends React.Component {
 	}
 
 	renderResults = data => {
-		console.log(data.results);
+		// console.log(data.results);
 		this.setState({
 			results: data.results
 		});
@@ -114,7 +114,6 @@ class Home extends React.Component {
 	};
 
 	render() {
-		console.log(process.env.REACT_APP_API_KEY)
 		return (
 			<Container>
 				<Sidebar.Pushable as={Segment} className='navbar'>

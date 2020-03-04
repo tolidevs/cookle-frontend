@@ -5,7 +5,6 @@ import { Button } from "semantic-ui-react";
 
 
 class Diet extends Component {
-
     state = {
         glutenfree: null,
         vegan: null,
@@ -13,38 +12,44 @@ class Diet extends Component {
         pescatarian: null,
         ketogenic: null,
         paleo: null
-    }
-    
+    };
+
     setDiet = (name) => {
-        !this.state.name ? this.setState({ name }) : this.setState({ name: null })
-    }
+        !this.state[name]
+        ? this.setState({ [name]: name })
+        : this.setState({ [name]: null });
+    };
 
     renderDiets = () => {
-        const diet = Object.keys(this.state)
-        return diet.map(diet =>
-            <div>< CheckboxSUI
-                name={diet}
-                checked={this.state.diet}
-                onClick={e => this.setDiet(e.target.name)} />
-            </div>)
-    }
+        const diet = Object.keys(this.state);
+        return diet.map(diet => (
+        <div>
+            <CheckboxSUI name={diet} select={this.setDiet} />
+        </div>
+        ));
+    };
+
+    createDietArray = () => {
+        const dietArray = Object.values(this.state);
+        this.props.clearOptionsState();
+        this.props.addDietToState(dietArray.filter(diet => diet));
+    };
 
     render() {
-        const { clearOptionsState } = this.props
         return (
-          <div className="optionsDiv">
+        <div className="optionsDiv">
             <h3>Select diet</h3>
             {this.renderDiets()}
             <Button
-              size="tiny"
-              compact
-              basic
-              color="teal"
-              onClick={clearOptionsState}
+            size="tiny"
+            compact
+            basic
+            color="teal"
+            onClick={this.createDietArray}
             >
-              Done
+            Done
             </Button>
-          </div>
+        </div>
         );
     }
 }
