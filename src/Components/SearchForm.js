@@ -8,39 +8,19 @@ import Calories from './Calories'
 
 
 class SearchForm extends Component {
+	
 	state = {
 		clicked: null,
-		allergies: null
+		allergies: null,
+		diet: null,
+		calories: 0,
+		cookTime: 0
 	};
 
 	handleClick = e => {
 		e.preventDefault();
 		const name = e.target.name;
 		this.setState({ clicked: name });
-	};
-
-	renderOptions = () => {
-		const { clicked } = this.state;
-		switch (clicked) {
-		default:
-			break;
-		case "Allergies":
-			return (
-				<Allergies
-					addAllergiesToState={this.addAllergiesToState}
-					clearOptionsState={this.clearOptionsState}
-				/> )
-		case "Diet":
-			return (
-				<Diet
-					addDietToState={this.addDietToState}
-					clearOptionsState={this.clearOptionsState}
-				/> )
-		case "Calories":
-			return <Calories clearOptionsState={this.clearOptionsState} />;
-		case "PrepTime":
-			return <CookTime clearOptionsState={this.clearOptionsState} />;
-		}
 	};
 
 	clearOptionsState = () => {
@@ -55,14 +35,55 @@ class SearchForm extends Component {
 		this.setState({ diet: array });
 	};
 
-	// addCaloriesToState = array => {
-	// 	this.setState({ allergies: array });
-	// };
+	addCaloriesToState = calories => {
+		this.setState({ calories });
+	};
 
-	// addPrepTimeToState = array => {
-	// 	this.setState({ allergies: array });
-	// };
+	addCookTimeToState = cookTime => {
+		this.setState({ cookTime: cookTime * 60 });
+	};
 
+	renderOptions = () => {
+		const { clicked, allergies, diet, calories, cookTime } = this.state;
+		switch (clicked) {
+		default:
+			break;
+		case "Allergies":
+			return (
+			<Allergies
+				allergies={allergies}
+				addAllergiesToState={this.addAllergiesToState}
+				clearOptionsState={this.clearOptionsState}
+			/>
+			);
+		case "Diet":
+			return (
+			<Diet
+				diet={diet}
+				addDietToState={this.addDietToState}
+				clearOptionsState={this.clearOptionsState}
+			/>
+			);
+		case "Calories":
+			return (
+			<Calories
+				calories={calories}
+				addCaloriesToState={this.addCaloriesToState}
+				clearOptionsState={this.clearOptionsState}
+			/>
+			);
+		case "PrepTime":
+			return (
+			<CookTime
+				cookTime={parseFloat(cookTime / 60)}
+				addCookTimeToState={this.addCookTimeToState}
+				clearOptionsState={this.clearOptionsState}
+			/>
+			);
+		}
+	};
+		
+		
 	render() {
 		const { searchFunction } = this.props;
 
@@ -96,6 +117,6 @@ class SearchForm extends Component {
 		</Segment>
 		);
 	}
-};
+	};
 
 export default SearchForm;
