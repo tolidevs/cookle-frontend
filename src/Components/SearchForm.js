@@ -20,12 +20,20 @@ class SearchForm extends Component {
 
 	renderOptions = () => {
 		const { clicked } = this.state
-		if (clicked === "Allergies") {
-			console.log("allergy")
-			return < Allergies clearOptionsState={this.clearOptionsState} />
-		} else if (clicked === "Diet") {
-			console.log("diet")
-			return < Diet clearOptionsState={this.clearOptionsState} />
+		switch (clicked) {
+			default: break
+			case ("Allergies"):
+				console.log("allergy")
+				return < Allergies clearOptionsState={this.clearOptionsState} />
+		 	case ("Diet"):
+				console.log("diet")
+				return < Diet clearOptionsState={this.clearOptionsState} />
+			case ("Calories"):
+				console.log("calories")
+				break
+			case ("PrepTime"):
+				console.log("prep time")
+				break
 		}
 	}
 
@@ -67,6 +75,7 @@ class SearchForm extends Component {
 					</Button>
 					<Button
 						secondary
+						name="PrepTime"
 						onClick={this.handleClick}
 					>Prep Time
 					</Button>
