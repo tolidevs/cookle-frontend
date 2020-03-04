@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import Diet from './Diet'
 import Allergies from './Allergies'
+import CookTime from './CookTime'
+import Calories from './Calories'
 
 
 
@@ -30,10 +32,10 @@ class SearchForm extends Component {
 				return < Diet clearOptionsState={this.clearOptionsState} />
 			case ("Calories"):
 				console.log("calories")
-				break
+				return < Calories clearOptionsState={this.clearOptionsState} />;
 			case ("PrepTime"):
 				console.log("prep time")
-				break
+				return < CookTime clearOptionsState={this.clearOptionsState} />;
 		}
 	}
 
@@ -56,25 +58,25 @@ class SearchForm extends Component {
 				/>
 				<Form.Group widths={4}>
 					<Button
-						secondary
+						color="teal"
 						name="Diet"
 						onClick={this.handleClick}
 					>Diet
 					</Button>
 					<Button
-						secondary
+						color="teal"
 						name="Allergies"
 						onClick={this.handleClick}
 					>Allergies
 					</Button>
 					<Button
-						secondary
+						color="teal"
 						name="Calories"
 						onClick={this.handleClick}
 					>Calories
 					</Button>
 					<Button
-						secondary
+						color="teal"
 						name="PrepTime"
 						onClick={this.handleClick}
 					>Prep Time

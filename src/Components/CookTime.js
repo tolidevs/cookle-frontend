@@ -1,37 +1,42 @@
 import React, { Component } from "react";
 import { Slider } from "react-semantic-ui-range";
 import "semantic-ui-css/semantic.min.css";
+import { Button, Label } from "semantic-ui-react";
+// import styled from "styled-components";
 
 class CookTime extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
+    state = {
+        valueSelected: 0,
+    };
+
+    render() {
+        const { clearOptionsState } = this.props
+        // will need an if else if value is 0 don't return a value
         return (
-          <Segment>
-            <h1>Callback!</h1>
-            <p>
-              <Slider
-                color="red"
-                inverted={false}
-                settings={{
-                  start: this.state.value1,
-                  min: 0,
-                  max: 10,
-                  step: 1,
-                  onChange: value => {
-                    this.setState({
-                      value1: value
-                    });
-                  }
-                }}
-              />
-            </p>
-            <Label color="red">{this.state.value1}</Label>
-          </Segment>
+            <div>
+                <h3>Max prep time in hours</h3>
+                <p>
+                    <Slider
+                        color="teal"
+                        inverted={false}
+                        settings={{
+                        start: this.state.valueSelected,
+                        min: 0,
+                        max: 5,
+                        step: 0.25,
+                        onChange: value => {
+                            this.setState({
+                            valueSelected: value
+                            });
+                        }
+                        }}
+                    />
+                </p>
+                <Label color="teal">{this.state.valueSelected} hours</Label>
+                <Button size='tiny' compact basic color="teal" onClick={clearOptionsState}>Set Time</Button>
+            </div>
         );
     }
 }
- 
-export default CookTime;
+    
+export default CookTime
