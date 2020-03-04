@@ -1,17 +1,16 @@
-
-
 .App {
-  text-align: center;
-  display: flex;
+	text-align: center;
+	display: flex;
 }
 
 .login-form {
-
 }
 
 .navbar {
-  height: 200px;
+	height: 200px;
+}
 
+.result {
 }
 
 /* .App-logo {

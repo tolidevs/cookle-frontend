@@ -17,6 +17,7 @@ class Show extends React.Component {
 	}
 
 	render() {
+		console.log(this.state.recipe);
 		return (
 			<Container>
 				<Sidebar.Pushable as={Segment} className='navbar'>

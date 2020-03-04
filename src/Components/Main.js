@@ -22,7 +22,7 @@ class Main extends React.Component {
 		if (!this.state.showPage) {
 			return <Home showPage={this.showPage} />;
 		} else {
-			return <Show showPage={this.showPage} />;
+			return <Show showPage={this.showPage} recipe={this.state.recipe} />;
 		}
 	}
 }

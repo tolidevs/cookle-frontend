@@ -6,6 +6,7 @@ import LoginForm from '../Components/LoginForm';
 import UserMenu from '../Components/UserMenu';
 import SearchForm from './SearchForm';
 import ResultsContainer from './ResultsContainer';
+import searchData from '../DevelopmentData/search.json';
 
 class Home extends React.Component {
 	state = {
@@ -15,7 +16,9 @@ class Home extends React.Component {
 		results: []
 	};
 
-	componentDidMount() {}
+	componentDidMount() {
+		console.log(searchData);
+	}
 
 	displayUserMenu = () => {
 		this.setState({
@@ -99,7 +102,7 @@ class Home extends React.Component {
 		const data = { id };
 		console.log(data, id);
 
-		fetch('http://localhost:3000/recipe', {
+		fetch('http://localhost:3000/get-recipe', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
