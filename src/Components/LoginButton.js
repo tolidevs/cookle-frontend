@@ -6,27 +6,39 @@ const LoginButton = props => {
 
 	if (!currentUser) {
 		return (
-			<div onClick={() => displayLogin()}>
-				<Button animated='vertical'>
-					<Button.Content visible>Login/Sign-up</Button.Content>
-					<Button.Content hidden>
-						<Icon name='arrow down' />
-					</Button.Content>
-				</Button>
+		<div>
+			<Button
+			color='teal'
+			floated="right"
+			animated="vertical"
+			onClick={displayLogin}
+			>
+			<Button.Content visible>
+				<Icon name="sign-in" />
+			</Button.Content>
+			<Button.Content hidden>
+				Log In
+			</Button.Content>
+			</Button>
+		</div>
+		);
+		} else {
+			return (
+        <div>
+			<Button
+				color="teal"
+				floated="right"
+				animated="vertical"
+				onClick={displayUserMenu}
+			>
+				<Button.Content visible>
+					<Icon name="sign in" />
+				</Button.Content>
+				<Button.Content hidden>My Account</Button.Content>
+			</Button>
 			</div>
 		);
-	} else {
-		return (
-			<div onClick={() => displayUserMenu()}>
-				<Button animated='vertical'>
-					<Button.Content visible>{currentUser.email}</Button.Content>
-					<Button.Content hidden>
-						<Icon name='arrow down' />
-					</Button.Content>
-				</Button>
-			</div>
-		);
-	}
+		}
 };
 
 export default LoginButton;
