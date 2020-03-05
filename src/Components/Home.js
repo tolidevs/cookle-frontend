@@ -1,13 +1,11 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Header, Segment, Sidebar, Container } from 'semantic-ui-react';
+import { Header, Container } from 'semantic-ui-react';
 import LoginButton from '../Components/LoginButton';
 import LoginForm from '../Components/LoginForm';
 import UserMenu from '../Components/UserMenu';
 import SearchForm from './SearchForm';
 import ResultsContainer from './ResultsContainer';
-import searchData from '../DevelopmentData/search.json';
-import showData from '../DevelopmentData/show.json';
 
 class Home extends React.Component {
 	state = {
@@ -32,17 +30,21 @@ class Home extends React.Component {
 	};
 
 	setUser = data => {
-		this.setState({
-			currentUser: data.email
-		});
+		if (data.message) {
+			console.log(data.message);
+		} else {
+			this.setState({
+				currentUser: data.id
+			});
+		}
 	};
 
-	loginFunction = (e, email, password) => {
-		e.preventDefault()
+	loginFunction = (e, email, password, button) => {
+		// e.preventDefault();
 		const data = { email, password };
 		// this.setUser(data)
 
-		fetch('http://localhost:3000/login', {
+		fetch(`http://localhost:3000/${button.name}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -51,31 +53,14 @@ class Home extends React.Component {
 			body: JSON.stringify(data)
 		})
 			.then(res => res.json())
-			.then(console.log)
-			// .then(this.setUser)
+			.then(this.setUser)
 			.catch(console.log);
-	};
-
-	signUpFunction = (email, password) => {
-		const data = { email, password };
-		// this.setUser(data)
-		fetch('http://localhost:3000/users/create', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				accept: 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(res => res.json())
-			.then(console.log)
-			// .then(this.setUser)
-			.catch(console.log);
+		e.target.reset();
 	};
 
 	searchFunction = (e, allergies, diet, calories, cookTime) => {
-		e.preventDefault()
-		
+		e.preventDefault();
+
 		const searchString = e.target.searchString.value;
 		const searchParams = {
 			search_string: searchString,
@@ -84,7 +69,7 @@ class Home extends React.Component {
 			calories: calories,
 			cook_time: cookTime
 		};
-		console.log(searchParams)
+		console.log(searchParams);
 		fetch('http://localhost:3000/search-recipes', {
 			method: 'POST',
 			headers: {
@@ -128,36 +113,36 @@ class Home extends React.Component {
 
 	render() {
 		return (
-      <Container className="main">
-        <nav>
-          <UserMenu
-            displayUserMenu={this.displayUserMenu}
-            userMenuShown={this.state.userMenuShown}
-          />
-          <LoginButton
-            displayLogin={this.displayLogin}
-            currentUser={this.state.currentUser}
-            displayUserMenu={this.displayUserMenu}
-          />
-        </nav>
+			<Container className='main'>
+				<nav>
+					<UserMenu
+						displayUserMenu={this.displayUserMenu}
+						userMenuShown={this.state.userMenuShown}
+					/>
+					<LoginButton
+						displayLogin={this.displayLogin}
+						currentUser={this.state.currentUser}
+						displayUserMenu={this.displayUserMenu}
+					/>
+				</nav>
 
-        <LoginForm
-          loginFunction={this.loginFunction}
-          signUpFunction={this.signUpFunction}
-          displayLogin={this.displayLogin}
-          loginShown={this.state.loginShown}
-        />
+				<LoginForm
+					id='loginForm'
+					loginFunction={this.loginFunction}
+					displayLogin={this.displayLogin}
+					loginShown={this.state.loginShown}
+				/>
 
-        <Header as="h1">COOKLE</Header>
-        <Header.Subheader>The Recipe App</Header.Subheader>
+				<Header as='h1'>COOKLE</Header>
+				<Header.Subheader>The Recipe App</Header.Subheader>
 
-        <SearchForm searchFunction={this.searchFunction} />
-        <ResultsContainer
-          results={this.state.results}
-          seeRecipe={this.seeRecipe}
-        />
-      </Container>
-    );
+				<SearchForm searchFunction={this.searchFunction} />
+				<ResultsContainer
+					results={this.state.results}
+					seeRecipe={this.seeRecipe}
+				/>
+			</Container>
+		);
 	}
 }
 export default Home;
