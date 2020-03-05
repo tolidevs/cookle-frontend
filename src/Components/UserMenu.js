@@ -2,7 +2,7 @@ import React from 'react';
 import { Segment, Sidebar, Menu, Icon } from 'semantic-ui-react';
 
 const UserMenu = props => {
-	const { displayUserMenu, userMenuShown } = props;
+	const { displayUserMenu, userMenuShown, logOutClick, setPage } = props;
 	return (
     <Sidebar
       as={Segment}
@@ -15,19 +15,22 @@ const UserMenu = props => {
       width="thin"
       color="teal"
     >
-      <Menu >
+      <Menu>
         <Menu.Item as="a" position="right">
-          <Icon name="home" />
+			<Icon name="home" onClick={() => setPage("home")}/>
         </Menu.Item>
-        <Menu.Item as="a">
+        <Menu.Item as="a" onClick={() => setPage("preferences")}>
           <Icon name="cog" />
         </Menu.Item>
         <Menu.Item as="a">
-          <Icon name="heart" />
+			<Icon name="heart" onClick={ () => setPage("favourites")}/>
+        </Menu.Item>
+        <Menu.Item as="a" onClick={logOutClick}>
+          <Icon name="log out" />
         </Menu.Item>
       </Menu>
     </Sidebar>
   );
-};
+	};
 
 export default UserMenu;

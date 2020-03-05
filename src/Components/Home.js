@@ -6,13 +6,21 @@ import LoginForm from '../Components/LoginForm';
 import UserMenu from '../Components/UserMenu';
 import SearchForm from './SearchForm';
 import ResultsContainer from './ResultsContainer';
+import searchData from '../DevelopmentData/search.json';
+import showData from '../DevelopmentData/show.json';
+import LogOutForm from '../Components/LogOutForm'
+import PreferencesContainer from '../Containers/PreferencesContainer'
+import Show from "./Show";
 
 class Home extends React.Component {
 	state = {
 		loginShown: false,
 		currentUser: null,
 		userMenuShown: false,
-		results: []
+		results: [],
+		recipe: null,
+		logOutClicked: false,
+		currentPage: 'home'
 	};
 
 	componentDidMount() {}
@@ -39,8 +47,21 @@ class Home extends React.Component {
 		}
 	};
 
-	loginFunction = (e, email, password, button) => {
-		// e.preventDefault();
+	logOutClick = () => {
+		this.setState({
+			logOutClicked: !this.state.logOutClicked
+		})
+	}
+
+	logOut = () => {
+		this.setState({
+			currentUser: null
+		})
+		this.logOutClick()
+	}
+
+	loginFunction = (e, email, password) => {
+		e.preventDefault()
 		const data = { email, password };
 		// this.setUser(data)
 
@@ -79,7 +100,12 @@ class Home extends React.Component {
 			body: JSON.stringify(searchParams)
 		})
 			.then(res => res.json())
-			.then(this.renderResults)
+			.then(results => {
+				this.renderResults(
+				this.setPage("results")
+				)
+			}
+			)
 			.catch(console.log);
 		// this.renderResults(searchData);
 
@@ -92,6 +118,11 @@ class Home extends React.Component {
 			results: data.results
 		});
 	};
+
+	// showPreferences = () => {
+	// 	const { currentUser } = this.state
+	// 	this.setState({ preferences: !this.state.preferences})
+	// }
 
 	seeRecipe = id => {
 		const data = { id };
@@ -106,43 +137,96 @@ class Home extends React.Component {
 			body: JSON.stringify(data)
 		})
 			.then(res => res.json())
-			.then(data => this.props.showPage(data))
+			.then(recipe => {
+				this.setState({ recipe })
+				this.setPage("show")
+			})
 			.catch(console.log);
 		// this.props.showPage(showData);
 	};
 
-	render() {
-		return (
-			<Container className='main'>
-				<nav>
-					<UserMenu
-						displayUserMenu={this.displayUserMenu}
-						userMenuShown={this.state.userMenuShown}
-					/>
-					<LoginButton
-						displayLogin={this.displayLogin}
-						currentUser={this.state.currentUser}
-						displayUserMenu={this.displayUserMenu}
-					/>
-				</nav>
+	setPage = (page) => {
+		if (this.state.currentPage === page) return;
+		this.setState({
+			currentPage: page
+		})
+	}
 
-				<LoginForm
-					id='loginForm'
-					loginFunction={this.loginFunction}
-					displayLogin={this.displayLogin}
-					loginShown={this.state.loginShown}
-				/>
+	// showPage = (recipe) => {
+	// 	this.setState({
+	// 		recipe
+	// 	});
+	// }
 
-				<Header as='h1'>COOKLE</Header>
-				<Header.Subheader>The Recipe App</Header.Subheader>
-
-				<SearchForm searchFunction={this.searchFunction} />
+	renderComponents = () => {
+		const { currentPage, results } = this.state
+		switch (currentPage) {
+			case "home": { return (
+				<SearchForm
+					setPage={this.setPage}
+					searchFunction={this.searchFunction} />)
+			}
+			case "results": { return (
 				<ResultsContainer
-					results={this.state.results}
+					setPage={this.setPage}
+					results={results}
 					seeRecipe={this.seeRecipe}
-				/>
-			</Container>
-		);
+				/>)
+			}
+			case "show": {
+				return (
+					<Show
+					setPage={this.setPage}
+					recipe={this.state.recipe} />
+			)}
+			case "preferences": {
+				return (<PreferencesContainer
+					currentUser={this.state.currentUser}
+					setPage={this.setPage} />
+				)}
+		}
+	}
+	
+
+	render() {
+		const { userMenuShown, currentUser, loginShown, logOutClicked } = this.state
+		return (
+      <Container className="main">
+        <nav>
+          <UserMenu
+            setPage={this.setPage}
+            logOutClick={this.logOutClick}
+            displayUserMenu={this.displayUserMenu}
+            userMenuShown={userMenuShown}
+            currentUser={currentUser}
+          />
+          <LoginButton
+            displayLogin={this.displayLogin}
+            currentUser={currentUser}
+            displayUserMenu={this.displayUserMenu}
+          />
+        </nav>
+
+        <LoginForm
+          loginFunction={this.loginFunction}
+          signUpFunction={this.signUpFunction}
+          displayLogin={this.displayLogin}
+          loginShown={loginShown}
+        />
+        <LogOutForm
+          displayLogin={this.displayLogin}
+          logOutClicked={logOutClicked}
+          logOut={this.logOut}
+        />
+
+        <Header as="h1" className="title" onclick={this.setPage("home")}>
+          COOKLE
+        </Header>
+        <Header.Subheader>The Recipe App</Header.Subheader>
+
+        {this.renderComponents()}
+      </Container>
+    );
 	}
 }
 export default Home;
