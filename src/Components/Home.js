@@ -37,7 +37,8 @@ class Home extends React.Component {
 		});
 	};
 
-	loginFunction = (email, password) => {
+	loginFunction = (e, email, password) => {
+		e.preventDefault()
 		const data = { email, password };
 		// this.setUser(data)
 
@@ -127,43 +128,36 @@ class Home extends React.Component {
 
 	render() {
 		return (
-			<Container>
-				<Sidebar.Pushable as={Segment} className='navbar'>
-					{!this.state.userMenuShown ? (
-						<LoginForm
-							loginFunction={this.loginFunction}
-							signUpFunction={this.signUpFunction}
-							displayLogin={this.displayLogin}
-							loginShown={this.state.loginShown}
-						/>
-					) : (
-						<UserMenu
-							displayUserMenu={this.displayUserMenu}
-							userMenuShown={this.state.userMenuShown}
-						/>
-					)}
+      <Container className="main">
+        <nav>
+          <UserMenu
+            displayUserMenu={this.displayUserMenu}
+            userMenuShown={this.state.userMenuShown}
+          />
+          <LoginButton
+            displayLogin={this.displayLogin}
+            currentUser={this.state.currentUser}
+            displayUserMenu={this.displayUserMenu}
+          />
+        </nav>
 
-					<Sidebar.Pusher>
-						<Segment>
-							<LoginButton
-								displayLogin={this.displayLogin}
-								currentUser={this.state.currentUser}
-								displayUserMenu={this.displayUserMenu}
-							/>
-						</Segment>
-					</Sidebar.Pusher>
-				</Sidebar.Pushable>
+        <LoginForm
+          loginFunction={this.loginFunction}
+          signUpFunction={this.signUpFunction}
+          displayLogin={this.displayLogin}
+          loginShown={this.state.loginShown}
+        />
 
-				<Header as='h1'>COOKLE</Header>
-				<Header.Subheader>The Recipe App</Header.Subheader>
+        <Header as="h1">COOKLE</Header>
+        <Header.Subheader>The Recipe App</Header.Subheader>
 
-				<SearchForm searchFunction={this.searchFunction} />
-				<ResultsContainer
-					results={this.state.results}
-					seeRecipe={this.seeRecipe}
-				/>
-			</Container>
-		);
+        <SearchForm searchFunction={this.searchFunction} />
+        <ResultsContainer
+          results={this.state.results}
+          seeRecipe={this.seeRecipe}
+        />
+      </Container>
+    );
 	}
 }
 export default Home;
