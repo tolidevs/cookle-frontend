@@ -1,11 +1,14 @@
 import React from 'react';
 
 const Result = props => {
-	const { result, seeRecipe } = props;
+	const { result, seeRecipe, setPage } = props;
 
 	return (
 		<div
-			onClick={() => seeRecipe(result.id)}
+			onClick={() => {
+				seeRecipe(result.id)
+				setPage("show")
+			}}
 			className={'result'}
 			style={{ backgroundImage: `url(${result.image})` }}>
 			<div>{result.id}</div>

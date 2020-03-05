@@ -46,7 +46,7 @@ class Show extends React.Component {
 						</Segment>
 					</Sidebar.Pusher>
 				</Sidebar.Pushable> */}
-        <Icon name="home" onClick={setPage("home")} />
+        {/* <Icon name="home" onClick={setPage("home")} /> */}
         <div>
           <ShowData recipe={recipe} />
         </div>

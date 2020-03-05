@@ -16,7 +16,7 @@ class Home extends React.Component {
 	state = {
 		loginShown: false,
 		currentUser: null,
-		userMenuShown: true,
+		userMenuShown: false,
 		results: [],
 		recipe: null,
 		logOutClicked: false,
@@ -113,7 +113,12 @@ class Home extends React.Component {
 			body: JSON.stringify(searchParams)
 		})
 			.then(res => res.json())
-			.then(this.renderResults)
+			.then(results => {
+				this.renderResults(
+				this.setPage("results")
+				)
+			}
+			)
 			.catch(console.log);
 		// this.renderResults(searchData);
 
@@ -145,7 +150,10 @@ class Home extends React.Component {
 			body: JSON.stringify(data)
 		})
 			.then(res => res.json())
-			.then(recipe => this.setState({recipe}))
+			.then(recipe => {
+				this.setState({ recipe })
+				this.setPage("show")
+			})
 			.catch(console.log);
 		// this.props.showPage(showData);
 	};
@@ -169,17 +177,15 @@ class Home extends React.Component {
 			case "home": { return (
 				<SearchForm
 					setPage={this.setPage}
-					searchFunction={this.searchFunction} />
-        	)
+					searchFunction={this.searchFunction} />)
 			}
 			case "results": { return (
 				<ResultsContainer
 					setPage={this.setPage}
 					results={results}
 					seeRecipe={this.seeRecipe}
-				/>
-        	)
-			 }
+				/>)
+			}
 			case "show": {
 				return (
 					<Show
@@ -226,7 +232,7 @@ class Home extends React.Component {
           logOut={this.logOut}
         />
 
-        <Header as="h1" className="title">
+        <Header as="h1" className="title" onclick={this.setPage("home")}>
           COOKLE
         </Header>
         <Header.Subheader>The Recipe App</Header.Subheader>
