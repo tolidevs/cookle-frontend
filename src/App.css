@@ -1,7 +1,8 @@
 body {
-  height: 100%;
+	height: 100%;
 	background-image: url('./pictures/background-img.jpg');
 	background-size: cover;
+	background-attachment: fixed;
 }
 
 .App {
@@ -10,24 +11,24 @@ body {
 }
 
 .login-form {
-  height: 100%;
+	height: 100%;
 }
 
 .navbar {
 	height: auto;
 }
 .side-drawer {
-    height: 100%;
-    background-color: #594F8D;
-    box-shadow: 1px 0 7px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 25%;
-    max-width: 400px;
-    z-index: 200;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-out;
+	height: 100%;
+	background-color: #594f8d;
+	box-shadow: 1px 0 7px rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 25%;
+	max-width: 400px;
+	z-index: 200;
+	transform: translateX(-100%);
+	transition: transform 0.3s ease-out;
 }
 
 .result {
