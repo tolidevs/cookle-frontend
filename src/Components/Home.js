@@ -14,7 +14,7 @@ class Home extends React.Component {
 	state = {
 		loginShown: false,
 		currentUser: null,
-		userMenuShown: false,
+		userMenuShown: true,
 		results: [],
 		logOutClicked: false
 	};
@@ -166,7 +166,7 @@ class Home extends React.Component {
         <LogOutForm
           displayLogin={this.displayLogin}
           logOutClicked={this.state.logOutClicked}
-          displayUserMenu={this.displayUserMenu}
+          logOut={this.logOut}
         />
 
         {/* <div className="title-div"> */}
