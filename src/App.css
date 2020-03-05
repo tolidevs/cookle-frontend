@@ -1,14 +1,27 @@
 body {
+  padding: 10px;
   height: 100%;
 	background-image: url('./pictures/background-img.jpg');
-	background-size: cover;
+  background-size: cover;
+  color: #07134F;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App {
 	text-align: center;
-	display: flex;
+  display: flex;
+  
 }
 
+/* .title-div{
+  height: 0.3vm;
+} */
+.ui.header {
+  color: #07134F;
+  font-weight: bold;
+  font-family: 'Stint Ultra Expanded', cursive;
+}
 .login-form {
   height: 100%;
 }
@@ -16,7 +29,7 @@ body {
 .navbar {
 	height: auto;
 }
-.side-drawer {
+/* .side-drawer {
     height: 100%;
     background-color: #594F8D;
     box-shadow: 1px 0 7px rgba(0, 0, 0, 0.5);
@@ -28,7 +41,7 @@ body {
     z-index: 200;
     transform: translateX(-100%);
     transition: transform 0.3s ease-out;
-}
+} */
 
 .result {
 }

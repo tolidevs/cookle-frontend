@@ -2,7 +2,7 @@ import React from 'react';
 import { Segment, Sidebar, Menu, Icon } from 'semantic-ui-react';
 
 const UserMenu = props => {
-	const { displayUserMenu, userMenuShown } = props;
+	const { displayUserMenu, userMenuShown, logOutClick } = props;
 	return (
     <Sidebar
       as={Segment}
@@ -15,7 +15,7 @@ const UserMenu = props => {
       width="thin"
       color="teal"
     >
-      <Menu >
+      <Menu>
         <Menu.Item as="a" position="right">
           <Icon name="home" />
         </Menu.Item>
@@ -25,9 +25,12 @@ const UserMenu = props => {
         <Menu.Item as="a">
           <Icon name="heart" />
         </Menu.Item>
+        <Menu.Item as="a" onClick={logOutClick}>
+          <Icon name="log out" />
+        </Menu.Item>
       </Menu>
     </Sidebar>
   );
-};
+	};
 
 export default UserMenu;

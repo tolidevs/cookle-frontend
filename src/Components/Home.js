@@ -8,13 +8,15 @@ import SearchForm from './SearchForm';
 import ResultsContainer from './ResultsContainer';
 import searchData from '../DevelopmentData/search.json';
 import showData from '../DevelopmentData/show.json';
+import LogOutForm from '../Components/LogOutForm'
 
 class Home extends React.Component {
 	state = {
 		loginShown: false,
 		currentUser: null,
 		userMenuShown: false,
-		results: []
+		results: [],
+		logOutClicked: false
 	};
 
 	componentDidMount() {}
@@ -36,6 +38,19 @@ class Home extends React.Component {
 			currentUser: data.email
 		});
 	};
+
+	logOutClick = () => {
+		this.setState({
+			logOutClicked: !this.state.logOutClicked
+		})
+	}
+
+	logOut = () => {
+		this.setState({
+			currentUser: null
+		})
+		this.logOutClick()
+	}
 
 	loginFunction = (e, email, password) => {
 		e.preventDefault()
@@ -131,6 +146,7 @@ class Home extends React.Component {
       <Container className="main">
         <nav>
           <UserMenu
+            logOutClick={this.logOutClick}
             displayUserMenu={this.displayUserMenu}
             userMenuShown={this.state.userMenuShown}
           />
@@ -147,8 +163,17 @@ class Home extends React.Component {
           displayLogin={this.displayLogin}
           loginShown={this.state.loginShown}
         />
+        <LogOutForm
+          displayLogin={this.displayLogin}
+          logOutClicked={this.state.logOutClicked}
+          displayUserMenu={this.displayUserMenu}
+        />
 
-        <Header as="h1">COOKLE</Header>
+        {/* <div className="title-div"> */}
+        <Header as="h1" className="title">
+          COOKLE
+        </Header>
+        {/* </div> */}
         <Header.Subheader>The Recipe App</Header.Subheader>
 
         <SearchForm searchFunction={this.searchFunction} />
