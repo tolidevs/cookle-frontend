@@ -233,10 +233,12 @@ class Home extends React.Component {
           logOut={this.logOut}
         />
 
-        <Header as="h1" className="title">
-          COOKLE
-        </Header>
-        <Header.Subheader>The Recipe App</Header.Subheader>
+        
+          <Header as="h1" className="title">
+            COOKLE
+          </Header>
+          <Header.Subheader>The Recipe App</Header.Subheader>
+        
 
         {this.renderComponents()}
       </Container>

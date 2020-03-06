@@ -21,6 +21,11 @@ body {
   color: #07134F;
   font-weight: bold;
   font-family: 'Stint Ultra Expanded', cursive;
+  font-size: 110px;
+}
+
+h1.ui.header {
+    font-size: 5em;
 }
 .login-form {
 	height: 100%;
