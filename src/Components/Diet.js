@@ -9,7 +9,8 @@ class Diet extends Component {
     constructor(props) {
         super(props);
         const { diet } = props
-            this.state = {
+        this.state = {
+                // if passed in diet array is not null, and if diet array includes element, set element state to element name or otherwise null
                 // glutenfree: diet && diet.includes("glutenfree") && "glutenfree",
                 vegan: diet && diet.includes("vegan") && "vegan",
                 vegetarian: diet && diet.includes("vegetarian") && "vegetarian",

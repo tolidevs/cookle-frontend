@@ -14,6 +14,7 @@ class Home extends React.Component {
   state = {
     loginShown: false,
     currentUser: null,
+    userPrefs: null,
     userMenuShown: false,
     results: [],
     recipe: null,
@@ -24,14 +25,12 @@ class Home extends React.Component {
   componentDidMount() {}
 
   displayUserMenu = () => {
-    console.log("menu");
     this.setState({
       userMenuShown: !this.state.userMenuShown
     });
   };
 
   displayLogin = () => {
-    console.log("display");
     this.setState({
       loginShown: !this.state.loginShown
     });
@@ -75,11 +74,33 @@ class Home extends React.Component {
     })
       .then(res => res.json())
       .then(user => {
-        this.setUser(user);
+        this.setUser(user)
+        this.getPreferences()
       })
+      // .then(() => this.getPreferences())
       .catch(console.log);
     e.target.reset();
   };
+
+  getPreferences = () => {
+    fetch(`http://localhost:3000/user_preferences`)
+      .then(res => res.json())
+      .then(preferences =>
+        this.getUserPreferences(preferences)
+      )
+      .then(console.log)
+      .catch(console.log);
+  }
+
+  getUserPreferences = (preferences) => {
+    const userId = this.state.currentUser
+    console.log(preferences)
+    const userPrefs = preferences.filter(preference => preference.user_id === userId)
+    this.setState({
+      userPrefs: userPrefs
+    })
+    // return userPrefs.map(preference => this.getPreferenceTypeAndName(preference))
+  }
 
   searchFunction = (e, allergies, diet, calories, cookTime) => {
     e.preventDefault();
@@ -112,7 +133,6 @@ class Home extends React.Component {
   };
 
   renderResults = data => {
-    // console.log(data.results);
     this.setState({
       results: data.results
     });
@@ -138,21 +158,14 @@ class Home extends React.Component {
   };
 
   setPage = page => {
-    // console.log();
     if (this.state.currentPage === page) return page;
     this.setState({
       currentPage: page
     });
   };
 
-  // showPage = (recipe) => {
-  // 	this.setState({
-  // 		recipe
-  // 	});
-  // }
-
   renderComponents = () => {
-    const { currentPage, results, recipe } = this.state;
+    const { currentPage, results, recipe, userPrefs, currentUser } = this.state;
     switch (currentPage) {
       case "home": {
         return (
@@ -178,7 +191,8 @@ class Home extends React.Component {
       case "preferences": {
         return (
           <PreferencesContainer
-            currentUser={this.state.currentUser}
+            userPrefs={userPrefs}
+            currentUser={currentUser}
             setPage={this.setPage}
           />
         );
