@@ -34,7 +34,7 @@ const LoginButton = props => {
 				<Button.Content visible>
 					<Icon name="sign in" />
 				</Button.Content>
-				<Button.Content hidden>My Account</Button.Content>
+				<Button.Content hidden>Account</Button.Content>
 			</Button>
 			</div>
 		);

@@ -10,7 +10,7 @@ class Diet extends Component {
         super(props);
         const { diet } = props
             this.state = {
-                glutenfree: diet && diet.includes("glutenfree") && "glutenfree",
+                // glutenfree: diet && diet.includes("glutenfree") && "glutenfree",
                 vegan: diet && diet.includes("vegan") && "vegan",
                 vegetarian: diet && diet.includes("vegetarian") && "vegetarian",
                 pescatarian: diet && diet.includes("pescatarian") && "pescatarian",

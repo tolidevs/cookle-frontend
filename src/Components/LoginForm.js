@@ -17,13 +17,14 @@ const LoginForm = props => {
 			<Segment>
 				<Form
 					className='login-form'
-					onSubmit={e =>
+					onSubmit={e => {
 						loginFunction(
 							e,
 							e.target.email.value,
 							e.target.password.value,
 							document.activeElement
 						)
+					}
 					}>
 					<Form.Group widths={2}>
 						<Form.Input
@@ -42,10 +43,10 @@ const LoginForm = props => {
 						/>
 					</Form.Group>
 
-					<Button name='login' type='submit'>
+					<Button name='login' type='submit' onClick={displayLogin}>
 						Login
 					</Button>
-					<Button name='create' type='submit' secondary>
+					<Button name='create' type='submit' onClick={displayLogin} secondary>
 						Sign Up
 					</Button>
 				</Form>
