@@ -6,8 +6,6 @@ import LoginForm from "../Components/LoginForm";
 import UserMenu from "../Components/UserMenu";
 import SearchForm from "./SearchForm";
 import ResultsContainer from "./ResultsContainer";
-import searchData from "../DevelopmentData/search.json";
-import showData from "../DevelopmentData/show.json";
 import LogOutForm from "../Components/LogOutForm";
 import PreferencesContainer from "../Containers/PreferencesContainer";
 import Show from "./Show";
@@ -66,7 +64,6 @@ class Home extends React.Component {
   loginFunction = (e, email, password, button) => {
     e.preventDefault();
     const data = { email, password };
-    // this.setUser(data)
 
     fetch(`http://localhost:3000/${button.name}`, {
       method: "POST",
@@ -108,9 +105,8 @@ class Home extends React.Component {
       .then(results => {
         this.renderResults(results);
       })
-      .then(this.setState({ currentPage: "results" }))
+      .then(() => this.setState({ currentPage: "results" }))
       .catch(console.log);
-    // this.renderResults(searchData);
 
     e.target.reset();
   };
@@ -121,11 +117,6 @@ class Home extends React.Component {
       results: data.results
     });
   };
-
-  // showPreferences = () => {
-  // 	const { currentUser } = this.state
-  // 	this.setState({ preferences: !this.state.preferences})
-  // }
 
   seeRecipe = id => {
     const data = { id };
@@ -141,15 +132,13 @@ class Home extends React.Component {
     })
       .then(res => res.json())
       .then(recipe => {
-        this.setState({ recipe });
-        this.setPage("show");
+        this.setState({ recipe, currentPage: "show" });
       })
       .catch(console.log);
-    // this.props.showPage(showData);
   };
 
   setPage = page => {
-    console.log();
+    // console.log();
     if (this.state.currentPage === page) return page;
     this.setState({
       currentPage: page
@@ -163,7 +152,7 @@ class Home extends React.Component {
   // }
 
   renderComponents = () => {
-    const { currentPage, results } = this.state;
+    const { currentPage, results, recipe } = this.state;
     switch (currentPage) {
       case "home": {
         return (
@@ -183,13 +172,22 @@ class Home extends React.Component {
         );
       }
       case "show": {
-        return <Show setPage={this.setPage} recipe={this.state.recipe} />;
+        console.log(recipe)
+        return <Show setPage={this.setPage} seeRecipe={this.seeRecipe} recipe={recipe} />;
       }
       case "preferences": {
         return (
           <PreferencesContainer
             currentUser={this.state.currentUser}
             setPage={this.setPage}
+          />
+        );
+      }
+      default: {
+        return (
+          <SearchForm
+            setPage={this.setPage}
+            searchFunction={this.searchFunction}
           />
         );
       }

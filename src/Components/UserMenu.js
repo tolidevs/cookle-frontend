@@ -25,7 +25,7 @@ const UserMenu = props => {
         <Menu.Item as="a">
 			<Icon name="heart" onClick={ () => setPage("favourites")}/>
         </Menu.Item>
-        <Menu.Item as="a" setPage={setPage} onClick={showLogOut}>
+        <Menu.Item as="a" onClick={showLogOut}>
           <Icon name="log out" />
         </Menu.Item>
       </Menu>
