@@ -2,7 +2,7 @@ import React from 'react';
 import { Segment, Sidebar, Menu, Icon } from 'semantic-ui-react';
 
 const UserMenu = props => {
-	const { displayUserMenu, userMenuShown, logOutClick, setPage } = props;
+	const { displayUserMenu, userMenuShown, showLogOut, setPage } = props;
 	return (
     <Sidebar
       as={Segment}
@@ -25,7 +25,7 @@ const UserMenu = props => {
         <Menu.Item as="a">
 			<Icon name="heart" onClick={ () => setPage("favourites")}/>
         </Menu.Item>
-        <Menu.Item as="a" onClick={logOutClick}>
+        <Menu.Item as="a" setPage={setPage} onClick={showLogOut}>
           <Icon name="log out" />
         </Menu.Item>
       </Menu>
