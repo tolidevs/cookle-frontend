@@ -11,8 +11,7 @@ const Result = props => {
 			}}
 			className={'result'}
 			style={{ backgroundImage: `url(${result.image})` }}>
-			<div>{result.id}</div>
-			<div>{result.title}</div>
+			<h3 className='resultText'>{result.title}</h3>
 		</div>
 	);
 };

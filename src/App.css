@@ -44,6 +44,29 @@ body {
 } */
 
 .result {
+	height: 231px;
+	width: 312px;
+	display: flex;
+	margin: 2%;
+	border-radius: 50px;
+	align-items: center;
+	justify-content: center;
+}
+
+#resultsContainer {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
+
+.resultText {
+	text-align: center;
+	padding-top: 5%;
+	background-color: #efeff7cc;
+	height: 25%;
+	width: 40%;
+	color: #072d68;
+	border-radius: 90%;
+	scale: 1.3;
 }
 
 #foodImage {
