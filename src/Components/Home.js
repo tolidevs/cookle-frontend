@@ -64,7 +64,7 @@ class Home extends React.Component {
     e.preventDefault();
     const data = { email, password };
 
-    fetch(`http://localhost:3000/${button.name}`, {
+    fetch(`https://cookle-recipe-app.herokuapp.com/${button.name}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ class Home extends React.Component {
   };
 
   getPreferences = () => {
-    fetch(`http://localhost:3000/user_preferences`)
+    fetch(`https://cookle-recipe-app.herokuapp.com/user_preferences`)
       .then(res => res.json())
       .then(preferences =>
         this.getUserPreferences(preferences)
@@ -114,7 +114,7 @@ class Home extends React.Component {
       cook_time: cookTime
     };
     console.log(searchParams);
-    fetch("http://localhost:3000/search-recipes", {
+    fetch("https://cookle-recipe-app.herokuapp.com/search-recipes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +142,7 @@ class Home extends React.Component {
     const data = { id };
     console.log(data, id);
 
-    fetch("http://localhost:3000/get-recipe", {
+    fetch("https://cookle-recipe-app.herokuapp.com/get-recipe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

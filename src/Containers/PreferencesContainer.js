@@ -27,6 +27,18 @@ class PreferencesContainer extends React.Component {
   //   return userPrefs.map(preference => this.getPreferenceTypeAndName(preference))
   // }
 
+  clearOptionsState = () => {
+    this.setState({ clicked: null });
+  };
+  
+  addAllergiesToState = array => {
+    this.setState({ allergies: array });
+  };
+
+  addDietToState = array => {
+    this.setState({ diet: array });
+  };
+
   mapUserPrefs = () => {
     const userPrefs = this.props.userPrefs
     return userPrefs.map(preference => this.getPreferenceTypeAndName(preference))
@@ -34,7 +46,7 @@ class PreferencesContainer extends React.Component {
 
   getPreferenceTypeAndName = (userPreference) => {
     const prefID = userPreference.preference_id
-    fetch(`http://localhost:3000/preferences/${prefID}`)
+    fetch(`https://cookle-recipe-app.herokuapp.com/preferences/${prefID}`)
       .then(res => res.json())
       .then(preference => this.setPreferenceTypeAndName(preference))
       .catch(console.log)
@@ -58,20 +70,19 @@ class PreferencesContainer extends React.Component {
   
   render() {
     const { allergies, diet } = this.state
-    console.log(this.mapPreferences())
     return (
       <Segment>
         <h2>Update Your Dietary Requirements</h2>
         <Diet
           diet={diet}
-          // addDietToState={this.addDietToState}
-          // clearOptionsState={this.clearOptionsState}
+          addDietToState={this.addDietToState}
+          clearOptionsState={this.clearOptionsState}
         />
         <h2>Update Your Allergies </h2>
         <Allergies
           allergies={allergies}
-          // addAllergiesToState={this.addAllergiesToState}
-          // clearOptionsState={this.clearOptionsState}
+          addAllergiesToState={this.addAllergiesToState}
+          clearOptionsState={this.clearOptionsState}
         />
       </Segment>
     );

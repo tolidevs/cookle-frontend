@@ -9,3 +9,6 @@ function App() {
 }
 
 export default App;
+
+// to do list:
+// need to update preferences page so that when submit it saves the preferences in back end
