@@ -11,6 +11,9 @@ function App() {
 export default App;
 
 // to do list:
-// add save button to save recipe
-// add page to display saved recipes
+// add save button to save recipe on show page
+// add page to display saved recipes (link heart icon)
 // update preferences page so that when submit it saves the preferences in back end
+// have preferences page show preferences
+// have search page auto load preferences
+// react-router
