@@ -2,7 +2,11 @@ import React from 'react';
 import { Button, Form, Segment, Sidebar, Message } from 'semantic-ui-react';
 
 const LoginForm = props => {
-	const { loginFunction, displayLogin, loginShown } = props;
+	const {
+		loginFunction,
+		// displayLogin,
+		loginShown,
+		errorMsg } = props;
 	return (
 		<Sidebar
 			as={Segment}
@@ -42,17 +46,28 @@ const LoginForm = props => {
 						/>
 					</Form.Group>
 
-					<Button name='login' type='submit' onClick={displayLogin}>
+					<Button
+						name='login'
+						type='submit'
+						// onClick={displayLogin}
+					>
 						Login
 					</Button>
-					<Button name='create' type='submit' onClick={displayLogin} secondary>
+					<Button
+						name='create'
+						type='submit'
+						// onClick={displayLogin}
+						secondary
+					>
 						Sign Up
 					</Button>
 				</Form>
 			</Segment>
-			<Message>
-				
-			</Message>
+			{errorMsg &&
+				<Message>
+				{errorMsg}
+				</Message>}
+			
 		</Sidebar>
 	);
 };

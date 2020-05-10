@@ -10,6 +10,9 @@ import LogOutForm from "../Components/LogOutForm";
 import PreferencesContainer from "../Containers/PreferencesContainer";
 import Show from "./Show";
 
+// const baseURL = 'https://cookle-recipe-app.herokuapp.com'
+const baseURL = 'http://localhost:3000'
+
 class Home extends React.Component {
   
   state = {
@@ -40,14 +43,21 @@ class Home extends React.Component {
 
   setUser = data => {
     if (data.message) {
-      console.log(data.message);
+      this.setErrorMsg(data.message)
     } else {
+      this.displayLogin()
       this.setState({
         currentUser: data.id,
         loginShown: false
       });
     }
   };
+
+  setErrorMsg = msg => {
+    this.setState({
+      errorMsg: msg
+    });
+  }
 
   showLogOut = () => {
     this.setState({
@@ -68,7 +78,7 @@ class Home extends React.Component {
     e.preventDefault();
     const data = { email, password };
 
-    fetch(`https://cookle-recipe-app.herokuapp.com/${button.name}`, {
+    fetch(`${baseURL}/${button.name}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,24 +91,25 @@ class Home extends React.Component {
         this.setUser(user)
         this.getPreferences()
       })
-      // .then(() => this.getPreferences())
-      .catch(console.log);
+      .catch(error => {
+        console.log( error )
+        this.setState({ errorMsg: error })
+      })
     e.target.reset();
   };
 
   getPreferences = () => {
-    fetch(`https://cookle-recipe-app.herokuapp.com/user_preferences`)
+    fetch(`${baseURL}/user_preferences`)
       .then(res => res.json())
       .then(preferences =>
         this.getUserPreferences(preferences)
       )
       .then(console.log)
-      .catch(console.log);
+      // .catch(console.log);
   }
 
   getUserPreferences = (preferences) => {
     const userId = this.state.currentUser
-    console.log(preferences)
     const userPrefs = preferences.filter(preference => preference.user_id === userId)
     this.setState({
       userPrefs: userPrefs
@@ -118,7 +129,7 @@ class Home extends React.Component {
       cook_time: cookTime
     };
     console.log(searchParams);
-    fetch("https://cookle-recipe-app.herokuapp.com/search-recipes", {
+    fetch(`${baseURL}/search-recipes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,8 +142,10 @@ class Home extends React.Component {
         this.renderResults(results);
       })
       .then(() => this.setState({ currentPage: "results" }))
-      .catch(error => this.setState({errorMsg: error}));
-
+      .catch(error => {
+        console.log(error)
+        this.setState({ errorMsg: error })
+      })
     e.target.reset();
   };
 
@@ -146,7 +159,7 @@ class Home extends React.Component {
     const data = { id };
     console.log(data, id);
 
-    fetch("https://cookle-recipe-app.herokuapp.com/get-recipe", {
+    fetch(`${baseURL}/get-recipe`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -240,9 +253,10 @@ class Home extends React.Component {
         <LoginForm
           loginFunction={this.loginFunction}
           signUpFunction={this.signUpFunction}
-          displayLogin={this.displayLogin}
+          // displayLogin={this.displayLogin}
           loginShown={loginShown}
           errorMsg={errorMsg}
+          setErrorMsg={this.setErrorMsg}
         />
         <LogOutForm
           displayUserMenu={this.displayUserMenu}

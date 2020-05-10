@@ -43,15 +43,15 @@ class SearchForm extends Component {
 		this.setState({ cookTime: cookTime * 60 });
 	};
 
-	clearState = () => {
-		this.setState({
-			clicked: null,
-			allergies: null,
-			diet: null,
-			calories: 0,
-			cookTime: 0
-		})
-	}
+	// clearState = () => {
+	// 	this.setState({
+	// 		clicked: null,
+	// 		allergies: null,
+	// 		diet: null,
+	// 		calories: 0,
+	// 		cookTime: 0
+	// 	})
+	// }
 
 	renderOptions = () => {
 		const { clicked, allergies, diet, calories, cookTime } = this.state;
