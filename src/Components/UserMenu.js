@@ -2,14 +2,13 @@ import React from 'react';
 import { Segment, Sidebar, Menu, Icon } from 'semantic-ui-react';
 
 const UserMenu = props => {
-	const { displayUserMenu, userMenuShown, showLogOut, setPage } = props;
+	const { userMenuShown, showLogOut, setPage } = props;
 	return (
     <Sidebar
       as={Segment}
       animation="overlay"
       icon="labeled"
       inverted
-      onHide={displayUserMenu}
       direction={"top"}
       visible={userMenuShown}
       width="thin"

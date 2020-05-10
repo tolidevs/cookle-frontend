@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Segment, Sidebar } from 'semantic-ui-react';
+import { Button, Form, Segment, Sidebar, Message } from 'semantic-ui-react';
 
 const LoginForm = props => {
 	const { loginFunction, displayLogin, loginShown } = props;
@@ -50,6 +50,9 @@ const LoginForm = props => {
 					</Button>
 				</Form>
 			</Segment>
+			<Message>
+				
+			</Message>
 		</Sidebar>
 	);
 };

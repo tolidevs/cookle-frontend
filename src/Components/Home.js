@@ -11,6 +11,7 @@ import PreferencesContainer from "../Containers/PreferencesContainer";
 import Show from "./Show";
 
 class Home extends React.Component {
+  
   state = {
     loginShown: false,
     currentUser: null,
@@ -19,7 +20,8 @@ class Home extends React.Component {
     results: [],
     recipe: null,
     logOutClicked: false,
-    currentPage: "home"
+    currentPage: "home",
+    errorMsg: null
   };
 
   componentDidMount() {}
@@ -55,9 +57,11 @@ class Home extends React.Component {
 
   logOut = () => {
     this.setState({
-      currentUser: null
+      currentUser: null,
+      userPrefs: null,
     });
-    this.logOutClick();
+    this.showLogOut();
+    this.displayUserMenu()
   };
 
   loginFunction = (e, email, password, button) => {
@@ -127,7 +131,7 @@ class Home extends React.Component {
         this.renderResults(results);
       })
       .then(() => this.setState({ currentPage: "results" }))
-      .catch(console.log);
+      .catch(error => this.setState({errorMsg: error}));
 
     e.target.reset();
   };
@@ -213,7 +217,8 @@ class Home extends React.Component {
       userMenuShown,
       currentUser,
       loginShown,
-      logOutClicked
+      logOutClicked,
+      errorMsg
     } = this.state;
     return (
       <Container className="main">
@@ -237,6 +242,7 @@ class Home extends React.Component {
           signUpFunction={this.signUpFunction}
           displayLogin={this.displayLogin}
           loginShown={loginShown}
+          errorMsg={errorMsg}
         />
         <LogOutForm
           displayUserMenu={this.displayUserMenu}

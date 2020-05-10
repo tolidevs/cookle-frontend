@@ -2,14 +2,14 @@ import React from "react";
 import { Segment, Sidebar, Menu, Icon } from "semantic-ui-react";
 
 const LogOutForm = props => {
-    const { displayUserMenu, logOutClicked, showLogOut, logOut } = props;
+    const { logOutClicked, showLogOut, logOut } = props;
     return (
       <Sidebar
         as={Segment}
         animation="overlay"
         icon="labeled"
         inverted
-        onHide={displayUserMenu}
+        // onHide={displayUserMenu}
         direction={"top"}
         visible={logOutClicked}
         width="thin"
