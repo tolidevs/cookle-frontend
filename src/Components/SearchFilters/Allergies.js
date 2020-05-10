@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Checkbox from '../Containers/Checkbox'
-import CheckboxSUI from '../Containers/CheckboxSUI'
+import CheckboxSUI from '../../Containers/CheckboxSUI'
 import { Button } from "semantic-ui-react";
 
 class Allergies extends Component {

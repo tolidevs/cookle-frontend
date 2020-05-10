@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment } from "semantic-ui-react";
-import Diet from '../Components/Diet'
-import Allergies from '../Components/Allergies'
+import Diet from '../Components/SearchFilters/Diet'
+import Allergies from '../Components/SearchFilters/Allergies'
 
 class PreferencesContainer extends React.Component {
 

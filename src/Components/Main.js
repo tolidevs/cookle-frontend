@@ -1,7 +1,7 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import Home from './Home';
-import Show from './Show';
+import Show from './ShowPage/Show';
 
 class Main extends React.Component {
 	state = {
