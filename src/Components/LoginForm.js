@@ -9,7 +9,6 @@ const LoginForm = props => {
 			animation='overlay'
 			icon='labeled'
 			inverted
-			onHide={displayLogin}
 			direction={'top'}
 			visible={loginShown}
 			width='thin'
