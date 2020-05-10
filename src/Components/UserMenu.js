@@ -2,7 +2,11 @@ import React from 'react';
 import { Segment, Sidebar, Menu, Icon } from 'semantic-ui-react';
 
 const UserMenu = props => {
-	const { userMenuShown, showLogOut, setPage } = props;
+  const {
+    userMenuShown,
+    showLogOut,
+    setPage
+  } = props;
 	return (
     <Sidebar
       as={Segment}

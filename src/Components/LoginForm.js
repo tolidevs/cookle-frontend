@@ -4,9 +4,19 @@ import { Button, Form, Segment, Sidebar, Message } from 'semantic-ui-react';
 const LoginForm = props => {
 	const {
 		loginFunction,
-		// displayLogin,
 		loginShown,
-		errorMsg } = props;
+		errorMsg,
+		setErrorMsg
+	} = props;
+	
+	const validateEmail = (input) => {
+		if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input)) {
+			setErrorMsg(false)
+			return false
+		}
+		setErrorMsg("Please enter a valid email address")
+	}
+	
 	return (
 		<Sidebar
 			as={Segment}
@@ -36,6 +46,7 @@ const LoginForm = props => {
 							placeholder='Email Address'
 							type='email'
 							required
+							onChange={e => validateEmail(e.target.value)}
 						/>
 						<Form.Input
 							name='password'
@@ -49,14 +60,12 @@ const LoginForm = props => {
 					<Button
 						name='login'
 						type='submit'
-						// onClick={displayLogin}
 					>
 						Login
 					</Button>
 					<Button
 						name='create'
 						type='submit'
-						// onClick={displayLogin}
 						secondary
 					>
 						Sign Up
@@ -64,7 +73,7 @@ const LoginForm = props => {
 				</Form>
 			</Segment>
 			{errorMsg &&
-				<Message>
+				<Message className="error-msg">
 				{errorMsg}
 				</Message>}
 			
