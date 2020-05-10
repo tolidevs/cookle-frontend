@@ -10,8 +10,8 @@ import LogOutForm from "../Components/LogOutForm";
 import PreferencesContainer from "../Containers/PreferencesContainer";
 import Show from "./Show";
 
-// const baseURL = 'https://cookle-recipe-app.herokuapp.com'
-const baseURL = 'http://localhost:3000'
+const baseURL = 'https://cookle-recipe-app.herokuapp.com'
+// const baseURL = 'http://localhost:3000'
 
 class Home extends React.Component {
   
